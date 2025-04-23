@@ -1,0 +1,51 @@
+.btn-wrapper {
+	text-align: center;
+}
+.addalt-btn {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 38px;
+    letter-spacing: 0.14em; 
+    text-transform: uppercase;
+    color: #333333;
+    padding: 9px 0; 
+}
+
+
+.info {
+    background: #F7F8FA;
+    color: #999999;
+    font-size: 12px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #EAEAEC;
+    text-align: center;
+}
+
+
+.my {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.label {
+    width: 180px;
+    height: 50px;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    font: 14px/50px Tahoma;
+    transition: all 0.18s ease-in-out;
+    border: 1px solid #333;
+    color: #333;
+}
+
+.label:hover {
+    color: white;
+    background: #333;
+}
