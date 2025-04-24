@@ -41,12 +41,12 @@ class MainEvents{
                 ob_start();
                 global $APPLICATION;
 // вызываем компонент, который формирует список блок случайных элементов инфоблока
-                print_r($optValues);
+                //print_r($optValues);
 // выключаем буферизацию и помечаем этот контент меткой «random-elements»
                 $APPLICATION->AddViewContent('drawDecorations', ob_get_clean());
 
 
-				DecorateUrSite\DecorateUrSite::drawDecorations($optValues);
+				echo DecorateUrSite\DecorateUrSite::drawDecorationsCached($optValues);
 			}
 			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			//DONE --> В первую очередь разобраться, почему НЕ выводится выбранное значение ОПЦИИ. Option::get ПУСТОЙ - why??? --> ОБРАЩАЛАСЬ К НЕВЕРНОМУ $name, ЗАБЫВ ПРО ТАБЫ
