@@ -3,6 +3,7 @@ use \Bitrix\Main\Context;
 use \Bitrix\Main\Config\Option;
 use \Bitrix\Main\Data\Cache;
 use \Bitrix\Main\Data\TaggedCache;
+use \Bitrix\Main\FileTable;
 class Helper {//Класс должен иметь то же наименование, что и файл с этим классом!!!
 	/**
      * Возвращает путь до картинки.
@@ -25,7 +26,13 @@ class Helper {//Класс должен иметь то же наименова�
             }
         } */
         if (!$imagePath) {
-            $imagePath = \CFile::GetPath($imageId);
+            //---> Да, вот она (альтернатива)
+            $fileData = FileTable::getById($imageId)->fetch();
+            if ($fileData) {
+                $imagePath = '/upload/' . $fileData['SUBDIR'] . '/' . $fileData['FILE_NAME'];
+            }
+            //$imagePath = \CFile::GetPath($imageId);
+			//---> Есть ли альтернатива на D7???
         }
         /* if ($imagePath) {
             $oModule = \dev2funModuleOpenGraphClass::getInstance();
