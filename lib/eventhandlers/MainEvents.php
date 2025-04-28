@@ -35,18 +35,12 @@ class MainEvents{
 
             $optValues = DecorateUrSite\Helper::cacheData($module_id);
 			if (!empty($optValues)) {
-
-
                 // включаем буферизацию вывода, все идет в отдельный буфер
                 ob_start();
                 global $APPLICATION;
-// вызываем компонент, который формирует список блок случайных элементов инфоблока
-                //print_r($optValues);
-// выключаем буферизацию и помечаем этот контент меткой «random-elements»
+                echo DecorateUrSite\DecorateUrSite::drawDecorationsCached($optValues);
+                // выключаем буферизацию и помечаем этот контент меткой «drawDecorations»
                 $APPLICATION->AddViewContent('drawDecorations', ob_get_clean());
-
-
-				echo DecorateUrSite\DecorateUrSite::drawDecorationsCached($optValues);
 			}
 			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			//DONE --> В первую очередь разобраться, почему НЕ выводится выбранное значение ОПЦИИ. Option::get ПУСТОЙ - why??? --> ОБРАЩАЛАСЬ К НЕВЕРНОМУ $name, ЗАБЫВ ПРО ТАБЫ
