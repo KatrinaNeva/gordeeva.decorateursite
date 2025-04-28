@@ -29,6 +29,12 @@ class DecorateUrSite {
             echo self::drawSnowScript();
         }
 	}
+
+    /**
+     * Отрисовывает украшение сайта на основе кешированных установленных действительных настроек
+     * @param array $options
+     * @return string
+     */
     public static function drawDecorationsCached($options) {
 	    $angled = isset($options['angle']);
 	    $pos = $angled ? $options['angle'] : '';
@@ -48,7 +54,10 @@ class DecorateUrSite {
         }
         return $decor;
     }
-
+    /**
+     * Отрисовывает скрипт со снежинками общий для всех типов отрисовки
+     * @return string
+     */
     private static function drawSnowScript(){
         return "<script>
             document.addEventListener('DOMContentLoaded', function() {
