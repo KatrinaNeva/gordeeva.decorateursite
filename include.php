@@ -1,4 +1,5 @@
 <?php
+use Bazarow\DecorateUrSite\DecorateUrSite;
 use \Bitrix\Main\Config\Option;
 global $APPLICATION;
 $module_id = 'bazarow.decorateursite';
@@ -16,7 +17,7 @@ if (COption::GetOptionString($module_id, 'source_script_edit_main') == 'js' && (
 	$optValues = \Bazarow\DecorateUrSite\Helper::getAllNeedOptions($module_id);	// get actual parameters (options)
 	// Выводим найденные связанные значения
 	if (!empty($optValues)) {
-		\Bazarow\DecorateUrSite\DecorateUrSite::drawDecorations($optValues);	 // draw decorations	
+		DecorateUrSite::drawDecorations($optValues);	 // draw decorations
 	}
 	?>
 <?endif;?>
