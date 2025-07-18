@@ -136,7 +136,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && $Update.$Apply.$RestoreDefaults <> ''
 		}
 	}
 	\Bitrix\Main\Data\Cache::createInstance()->CleanDir('/bazarow.decorateursite/');
-	
 	LocalRedirect($APPLICATION->GetCurPage()."?mid=".$module_id."&lang=".LANG);
 }
 ?>
