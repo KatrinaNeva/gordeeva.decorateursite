@@ -92,6 +92,7 @@ class Helper {//Класс должен иметь то же наименова�
 	public static function cacheData($mi){
         $data = [];
         $cache = Cache::createInstance();
+        $cache->noOutput(); // Отключаем автоматический захват вывода
         $taggedCache = new TaggedCache();
         $cacheKey = md5(__METHOD__ . Context::getCurrent()->getSite());
         $cacheDir = '/'.$mi.'/';

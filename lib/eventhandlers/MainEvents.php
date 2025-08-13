@@ -34,14 +34,12 @@ class MainEvents{
 		if((empty($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') && strpos($_SERVER['REQUEST_URI'], 'bitrix/') === FALSE && php_sapi_name() != "cli" && Option::get($module_id, 'source_script_edit_main') != 'js'){
 
             $optValues = DecorateUrSite\Helper::cacheData($module_id);
-			if (!empty($optValues)) {
-                // включаем буферизацию вывода, все идет в отдельный буфер
-                ob_start();
+            if (!empty($optValues)) {
                 global $APPLICATION;
-                echo DecorateUrSite\DecorateUrSite::drawDecorationsCached($optValues);
-                // выключаем буферизацию и помечаем этот контент меткой «drawDecorations»
-                $APPLICATION->AddViewContent('drawDecorations', ob_get_clean());
-			}
+                // Получаем содержимое напрямую в переменную
+                $content = DecorateUrSite\DecorateUrSite::drawDecorationsCached($optValues);
+                $APPLICATION->AddViewContent('drawDecorations', $content);
+            }
 			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			//DONE --> В первую очередь разобраться, почему НЕ выводится выбранное значение ОПЦИИ. Option::get ПУСТОЙ - why??? --> ОБРАЩАЛАСЬ К НЕВЕРНОМУ $name, ЗАБЫВ ПРО ТАБЫ
 			//
