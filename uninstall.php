@@ -1,18 +1,18 @@
 <?php
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
-$module_id = 'bazarow.decorateursite';
+$module_id = 'gordeeva.decorateursite';
 // Отписка от событий
 if (CModule::IncludeModule($module_id)) {
     try {
         // 1. Отписываем D7-обработчики
-        \Bazarow\DecorateUrSite\EventHandlers\MainEvents::unregisterHandlers();
+        \Gordeeva\DecorateUrSite\EventHandlers\MainEvents::unregisterHandlers();
         // 2. Удаляем legacy-обработчики (если есть)
         $eventManager = \Bitrix\Main\EventManager::getInstance();
         $eventManager->unRegisterEventHandler(
             'main',
             'OnBeforeEndBufferContent',
             $module_id,
-            '\Bazarow\DecorateUrSite\Main',
+            '\Gordeeva\DecorateUrSite\Main',
             'decorateSite'
         );   
         // 3. Очищаем настройки

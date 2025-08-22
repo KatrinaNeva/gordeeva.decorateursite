@@ -1,4 +1,4 @@
-<?namespace Bazarow\DecorateUrSite;
+<?namespace Gordeeva\DecorateUrSite;
 use \Bitrix\Main\Config\Option;
 class DecorateUrSite {
     /**

@@ -1,9 +1,9 @@
 <?php
-namespace Bazarow\DecorateUrSite\EventHandlers;
+namespace Gordeeva\DecorateUrSite\EventHandlers;
 use \Bitrix\Main\Localization;
 use \Bitrix\Main\Config\Option;
 use \Bitrix\Main\EventManager;
-use \Bazarow\DecorateUrSite;
+use \Gordeeva\DecorateUrSite;
 
 global $APPLICATION;
 Localization\Loc::loadMessages(__FILE__);
@@ -30,7 +30,7 @@ class MainEvents{
      * @return void
      */
     public static function decorateSite(){
-		$module_id = 'bazarow.decorateursite';
+		$module_id = 'gordeeva.decorateursite';
 		if((empty($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') && strpos($_SERVER['REQUEST_URI'], 'bitrix/') === FALSE && php_sapi_name() != "cli" && Option::get($module_id, 'source_script_edit_main') != 'js'){
 
             $optValues = DecorateUrSite\Helper::cacheData($module_id);

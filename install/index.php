@@ -5,9 +5,9 @@ use Bitrix\Main\Config\Option;
 use Bitrix\Main\EventManager;
 use Bitrix\Main\Application;
 use Bitrix\Main\IO\Directory;
-use Bazarow\DecorateUrSite;
+use Gordeeva\DecorateUrSite;
 Loc::loadMessages(__FILE__);
-class bazarow_decorateursite extends CModule {
+class gordeeva_decorateursite extends CModule {
     public function __construct(){
         if(file_exists(__DIR__."/version.php")){
             $arModuleVersion = array();
@@ -58,7 +58,7 @@ class bazarow_decorateursite extends CModule {
         return false;
     }
     public function InstallEvents(){
-		RegisterModuleDependences("main", "OnBeforeEndBufferContent", $this->MODULE_ID, "Bazarow\DecorateUrSite\EventHandlers\MainEvents", "decorateSite", "100");
+		RegisterModuleDependences("main", "OnBeforeEndBufferContent", $this->MODULE_ID, "Gordeeva\DecorateUrSite\EventHandlers\MainEvents", "decorateSite", "100");
 		return false;
 	}
     public function DoUninstall(){
@@ -67,7 +67,7 @@ class bazarow_decorateursite extends CModule {
         $this->UnInstallFiles();
         $this->UnInstallDB();
 		$this->UnInstallEvents();
-		\Bitrix\Main\Data\Cache::createInstance()->CleanDir('/bazarow.decorateursite/');
+		\Bitrix\Main\Data\Cache::createInstance()->CleanDir('/gordeeva.decorateursite/');
         ModuleManager::unRegisterModule($this->MODULE_ID);
         $APPLICATION->IncludeAdminFile(
             Loc::getMessage("BO_DUS_UNINSTALL_TITLE")." \"".Loc::getMessage("BO_DUS_NAME")."\"",
@@ -89,7 +89,7 @@ class bazarow_decorateursite extends CModule {
         return false;
     } 
 	public function UnInstallEvents(){
-        UnRegisterModuleDependences("main", "OnBeforeEndBufferContent", $this->MODULE_ID, "Bazarow\DecorateUrSite\EventHandlers\MainEvents", "decorateSite");
+        UnRegisterModuleDependences("main", "OnBeforeEndBufferContent", $this->MODULE_ID, "Gordeeva\DecorateUrSite\EventHandlers\MainEvents", "decorateSite");
         return false;
     }
 }

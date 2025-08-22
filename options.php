@@ -4,7 +4,7 @@ use \Bitrix\Main\HttpApplication;
 use \Bitrix\Main\Loader;
 use \Bitrix\Main\Config\Option;
 use \Bitrix\Main\SiteTemplateTable;
-use Bazarow\DecorateUrSite\Settings\FormOptionsBuilder;
+use Gordeeva\DecorateUrSite\Settings\FormOptionsBuilder;
 Loc::loadMessages(__FILE__);
 $request = HttpApplication::getInstance()->getContext()->getRequest();
 $module_id = htmlspecialcharsbx($request["mid"] != "" ? $request["mid"] : $request["id"]);
@@ -135,7 +135,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && $Update.$Apply.$RestoreDefaults <> ''
 			}
 		}
 	}
-	\Bitrix\Main\Data\Cache::createInstance()->CleanDir('/bazarow.decorateursite/');
+	\Bitrix\Main\Data\Cache::createInstance()->CleanDir('/gordeeva.decorateursite/');
 	LocalRedirect($APPLICATION->GetCurPage()."?mid=".$module_id."&lang=".LANG);
 }
 ?>

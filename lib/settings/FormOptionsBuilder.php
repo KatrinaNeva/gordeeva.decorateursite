@@ -1,5 +1,5 @@
 <?php
-namespace Bazarow\DecorateUrSite\Settings;  // <-- Namespace с заглавных
+namespace Gordeeva\DecorateUrSite\Settings;  // <-- Namespace с заглавных
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Loader;
 class FormOptionsBuilder
