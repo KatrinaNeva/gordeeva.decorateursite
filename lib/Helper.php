@@ -4,7 +4,7 @@ use \Bitrix\Main\Config\Option;
 use \Bitrix\Main\Data\Cache;
 use \Bitrix\Main\Data\TaggedCache;
 use \Bitrix\Main\FileTable;
-class Helper {//Класс должен иметь то же наименование, что и файл с этим классом!!!
+class Helper {
 	/**
      * Возвращает путь до картинки.
      * Ресайзит картинку, если нужно
@@ -13,35 +13,13 @@ class Helper {//Класс должен иметь то же наименова�
      */
     public function getImagePathById($imageId)
     {
-        //$settingsResize = \dev2funModuleOpenGraphClass::getInstance()->getSettingsResize();
         $imagePath = '';
-        /* if ($settingsResize['ENABLE'] === 'Y' && (!empty($settingsResize['WIDTH']) || !empty($settingsResize['HEIGHT']))) {
-            if (empty($settingsResize['TYPE'])) $settingsResize['TYPE'] = BX_RESIZE_IMAGE_PROPORTIONAL;
-            $arImage = \CFile::ResizeImageGet($imageId, [
-                'width' => (!empty($settingsResize['WIDTH']) ? $settingsResize['WIDTH'] : 99999),
-                'height' => (!empty($settingsResize['HEIGHT']) ? $settingsResize['HEIGHT'] : 99999),
-            ], $settingsResize['TYPE']);
-            if ($arImage) {
-                $imagePath = $arImage['src'];
-            }
-        } */
         if (!$imagePath) {
-            //---> Да, вот она (альтернатива)
             $fileData = FileTable::getById($imageId)->fetch();
             if ($fileData) {
                 $imagePath = '/upload/' . $fileData['SUBDIR'] . '/' . $fileData['FILE_NAME'];
             }
-            //$imagePath = \CFile::GetPath($imageId);
-			//---> Есть ли альтернатива на D7???
         }
-        /* if ($imagePath) {
-            $oModule = \dev2funModuleOpenGraphClass::getInstance();
-            $prefix = '';
-            if (!preg_match('#^(http|https)#', $imagePath)) {
-                $prefix = $oModule->getProtocol() . $oModule->getHost();
-            }
-            $imagePath = $prefix . $imagePath;
-        } */
         return $imagePath;
     }
     /**
@@ -49,19 +27,13 @@ class Helper {//Класс должен иметь то же наименова�
      * @param int $mi
      * @return array
      */
-	public static function getAllNeedOptions($mi) { //не стоит ли передавать в метод в качестве аргумента опции? или правильно как сейчас в методе получать их с помощью Option::getForModule($mi)?? нид ту синк
+	public static function getAllNeedOptions($mi) {
 		$allOptions = Option::getForModule($mi);
 		$relatedValues = [];
-		// Перебираем все элементы массива
 		foreach ($allOptions as $key => $value) {
-			// Проверяем, содержит ли ключ 'source_activity_edit' и значение равно 'Y'
 			if (strpos($key, 'source_activity_edit') === 0 && $value === 'Y') {
-				// Извлекаем суффикс (например, 'edit1')
-				$suffix = substr($key, strlen('source_activity_')); // Получаем 'edit1', 'edit2' и т.д.
-				//echo "Найдена активная запись с суффиксом: $suffix\n";
-				// Теперь ищем все ключи с этим суффиксом
+				$suffix = substr($key, strlen('source_activity_'));
 				foreach ($allOptions as $subKey => $subValue) {
-					// Проверяем, заканчивается ли ключ на наш суффикс (edit1, edit2 и т.д.)
 					if (strpos($subKey, $suffix) !== false && $subKey !== $key) {
 						$parts = explode('_', $subKey);
 						if (count($parts) >= 3) {
@@ -92,7 +64,7 @@ class Helper {//Класс должен иметь то же наименова�
 	public static function cacheData($mi){
         $data = [];
         $cache = Cache::createInstance();
-        $cache->noOutput(); // Отключаем автоматический захват вывода
+        $cache->noOutput();
         $taggedCache = new TaggedCache();
         $cacheKey = md5(__METHOD__ . Context::getCurrent()->getSite());
         $cacheDir = '/'.$mi.'/';
@@ -106,7 +78,6 @@ class Helper {//Класс должен иметь то же наименова�
                     $data[$k] = $val;
                 }
             }
-            // Устанавливаем тег
             $taggedCache->startTagCache($cacheDir);
             $taggedCache->registerTag($cacheTag);
             $taggedCache->endTagCache();
