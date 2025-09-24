@@ -23,7 +23,7 @@ $allOptions[] = array(
     ),
 	false
 );
-$allOptions[] = array(//А можно ли сделать это покрасивее. Вынести параметр с дефолтными изображениями в отдельный файл ---> DONE (вынесено в FormOptionsBuilder)
+$allOptions[] = array(
     'source_defaultImage',
     Loc::getMessage('BO_DUS_IMAGE_DEFAULT'),
     array(
@@ -100,8 +100,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && $Update.$Apply.$RestoreDefaults <> ''
 			if($arOption[2][0] == "checkbox" && $val != "Y")
 			{
 				$val = "N";
-			} 
-			//написать скрипт который уберет активность у остальных чекбоксов source_activity при выборе одного из них. <-- сделано через js
+			}
 			elseif($arOption[2][0] == "file" && !empty($val))
 			{
 				if(!$arOption[3]) {
@@ -136,7 +135,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && $Update.$Apply.$RestoreDefaults <> ''
 		}
 	}
 	\Bitrix\Main\Data\Cache::createInstance()->CleanDir('/gordeeva.decorateursite/');
-	LocalRedirect($APPLICATION->GetCurPage()."?mid=".$module_id."&lang=".LANG);
+	if($Update.$RestoreDefaults)
+	    LocalRedirect($APPLICATION->GetCurPage()."?mid=".$module_id."&lang=".LANG);
 }
 ?>
     <link rel="stylesheet" href="<?= '/bitrix/css/' . $module_id . '/admin_styles.css' ?>">
@@ -192,16 +192,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && $Update.$Apply.$RestoreDefaults <> ''
 								<div>
 									<img src="<?=$Option[4][$tabKey]?>"/>
 									<input type="hidden" name="<?=htmlspecialcharsbx($Option[0])."_".$tab['DIV']?>" value="<?=$Option[4][$tabKey]?>">
-									<!-- Это изображение должно быть индивидуально для каждой вкладки праздника
-										соответственно оно зависит от текущего таба, но при этом должно быть опцией, 
-										чтобы передать картинку дальше в обработку (include or main)
-										
-										Если пользватель добавляет свою картинку, она должна заменять дефолтное
-										(нужно добавить условие if)
-										
-										
-										-> $tabKey - ключ текущего таба, который соответствует ключу подходящего этому табу изображению
-									-->
 								</div>
 							<?else:?>
 								<p class="addalt-btn"><?=Loc::getMessage('BO_DUS_IMAGE_CHOISE')?></p>
@@ -298,7 +288,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && $Update.$Apply.$RestoreDefaults <> ''
 			checkboxes.forEach(function(checkbox) {
 				checkbox.addEventListener('change', function() {
 					if (this.checked) {
-						// Снимаем галочки с других чекбоксов
 						checkboxes.forEach(function(other) {
 							if (other !== checkbox) other.checked = false;
 						});
