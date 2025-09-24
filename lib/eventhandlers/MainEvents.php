@@ -32,28 +32,12 @@ class MainEvents{
     public static function decorateSite(){
 		$module_id = 'gordeeva.decorateursite';
 		if((empty($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') && strpos($_SERVER['REQUEST_URI'], 'bitrix/') === FALSE && php_sapi_name() != "cli" && Option::get($module_id, 'source_script_edit_main') != 'js'){
-
             $optValues = DecorateUrSite\Helper::cacheData($module_id);
             if (!empty($optValues)) {
                 global $APPLICATION;
-                // Получаем содержимое напрямую в переменную
                 $content = DecorateUrSite\DecorateUrSite::drawDecorationsCached($optValues);
                 $APPLICATION->AddViewContent('drawDecorations', $content);
             }
-			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			//DONE --> В первую очередь разобраться, почему НЕ выводится выбранное значение ОПЦИИ. Option::get ПУСТОЙ - why??? --> ОБРАЩАЛАСЬ К НЕВЕРНОМУ $name, ЗАБЫВ ПРО ТАБЫ
-			//
-			//FOR PHP (CACHE)+JS VARIATION
-			//
-			//Добавить таблицу в базе данных при установке - index.php
-			//Добавить классы для работы с данными настроек - обработка и запись в БД - как минимум 2 класса
-			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			//
-			//FOR ONLY JS VARIATION
-			//
-			//Обработка пока что только в файле include.php
-			//
-			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!	
         }
     } 
  }
