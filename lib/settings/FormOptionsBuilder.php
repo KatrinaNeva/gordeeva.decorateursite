@@ -1,5 +1,5 @@
 <?php
-namespace Gordeeva\DecorateUrSite\Settings;  // <-- Namespace с заглавных
+namespace Gordeeva\DecorateUrSite\Settings;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Loader;
 class FormOptionsBuilder
@@ -46,7 +46,6 @@ class FormOptionsBuilder
      */
 	public static function forDefaultImages(string $mi): array 
 	{
-		// Получить путь к папке images // А можно ли сделать это покрасивее. Вынести параметр с дефолтными изображениями в отдельный файл
 		$docRoot = $_SERVER['DOCUMENT_ROOT'];
 		$fullPath = Loader::getLocal('modules/'.$mi.'/install/assets/images/'); // Полный путь
 		$moduleImgsPath = str_replace($docRoot, '', $fullPath);
