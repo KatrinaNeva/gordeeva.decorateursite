@@ -79,7 +79,7 @@ class DecorateUrSite {
         
                 function createSnowflake() {
                     const snowflake = document.createElement('div');
-                    snowflake.innerHTML = '❄';
+                    snowflake.innerHTML = '&#10052;';
         
                     // Вычисление параметров
                     const opacity = Math.random() * 0.7 + 0.3;
