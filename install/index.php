@@ -52,6 +52,10 @@ class gordeeva_decorateursite extends CModule {
             throw new Exception(Loc::getMessage("ERRORS_CREATE_DIR",array('#DIR#'=>'bitrix/css')));
             return false;
         }
+        if(!CopyDirFiles($_SERVER["DOCUMENT_ROOT"]."/local/modules/".$this->MODULE_ID."/install/assets/images", $_SERVER["DOCUMENT_ROOT"]."/upload/".$this->MODULE_ID, true, true)){
+            throw new Exception(Loc::getMessage("ERRORS_CREATE_DIR",array('#DIR#'=>'upload')));
+            return false;
+        }
         return true;
     }
     public function InstallDB(){
@@ -81,6 +85,9 @@ class gordeeva_decorateursite extends CModule {
         }
         if(file_exists($_SERVER['DOCUMENT_ROOT'].'/bitrix/css/'.$this->MODULE_ID) && !DeleteDirFilesEx( '/bitrix/css/'.$this->MODULE_ID )){
             throw new Exception(Loc::getMessage("ERRORS_DELETE_FILE",array('#FILE#'=>'bitrix/css/'.$this->MODULE_ID)));
+        }
+        if(file_exists($_SERVER['DOCUMENT_ROOT'].'/upload/'.$this->MODULE_ID) && !DeleteDirFilesEx( '/upload/'.$this->MODULE_ID )){
+            throw new Exception(Loc::getMessage("ERRORS_DELETE_FILE",array('#FILE#'=>'upload/'.$this->MODULE_ID)));
         }
         return true;
     }

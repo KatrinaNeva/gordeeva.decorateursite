@@ -46,13 +46,19 @@ class FormOptionsBuilder
      */
 	public static function forDefaultImages(string $mi): array 
 	{
-		$docRoot = $_SERVER['DOCUMENT_ROOT'];
-		$fullPath = Loader::getLocal('modules/'.$mi.'/install/assets/images/'); // Полный путь
-		$moduleImgsPath = str_replace($docRoot, '', $fullPath);
-		return array(
-			1 => $moduleImgsPath.'new_year.png',
-			2 => $moduleImgsPath.'23f.png',
-			3 => $moduleImgsPath.'8m.png'
-		);
+//		$docRoot = $_SERVER['DOCUMENT_ROOT'];
+//		$fullPath = Loader::getLocal('modules/'.$mi.'/install/assets/images/'); // Полный путь
+//		$moduleImgsPath = str_replace($docRoot, '', $fullPath);
+//		return array(
+//			1 => $moduleImgsPath.'new_year.png',
+//			2 => $moduleImgsPath.'23f.png',
+//			3 => $moduleImgsPath.'8m.png'
+//		);
+        $fullPath = '/upload/'.$mi.'/';
+        return array(
+            1 => $fullPath.'new_year.png',
+            2 => $fullPath.'23f.png',
+            3 => $fullPath.'8m.png'
+        );
 	}
 }
